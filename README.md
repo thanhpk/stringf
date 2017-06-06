@@ -33,6 +33,24 @@ console.log(str)
 // hi Kieu Thanh, here is your number #2108.
 ```
 
+# Test
+## Go
+```sh
+go test
+```
+
+## Js
+```sh
+npm test
+```
+
+# Testcase
+| String    | Parameter map | Output    |
+|-----------|---------------|-----------|
+| hi #name  | name: `Thanh` | hi Thanh  |
+| hi #num   | num: `2108`   | hi 2108   |
+| ##abc     | abc: `bcd`    | #abc      |
+
 # Pseudocode to implement in your own language
 
 ### input:

@@ -31,4 +31,4 @@ exports.Format = function(s, m) {
 		i++;
 	}
 	return output;
-}
+};
