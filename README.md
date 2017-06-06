@@ -1,4 +1,4 @@
-# Sringf
+# Sringf [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![npm version](https://badge.fury.io/js/stringf.svg)](https://badge.fury.io/js/stringf)
 Dead simple cross-language string formatter
 
 No dependencies, O(N*m)
@@ -34,15 +34,15 @@ console.log(str)
 ```
 
 # Pseudocode to implement in your own language
-```
-input:
+
+### input:
 	a string, s
 	a map string to string, paramMap
-output:
+### output:
   a string with param replaced
 
+```
 let ESCCHAR ← '#', i ← 0, output ← ""
-
 while i < length(s) do
 	if s[i] = ESCCHAR then
 		let j ← i + 1
@@ -51,7 +51,7 @@ while i < length(s) do
 			if (j - i) mod 2 = 0 then
 				output ← output + ESCCHAR
 		if (j - i) mod 2 ≠ 0 then
-			let param ← ""
+			let param ← "" (parse parameter key)
 			while j < length(s) and s[j] ≠ ' ' do
 				param ← param + s[j]
 				j ← j + 1

@@ -1,6 +1,6 @@
 {
   "name": "stringf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dead simple string formatter",
   "main": "index.js",
   "scripts": {
