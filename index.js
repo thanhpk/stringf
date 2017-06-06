@@ -12,9 +12,7 @@ exports.Format = function(s, m) {
 					output = output + ESCCHAR;
 				}
 			}
-			if ((j - i) %2 == 0) {
-				output = output + s[j];
-			} else {
+			if ((j - i) %2 != 0) {
 				var param = "";
 				while (j < s.length && s[j] != ' ') {
 					param = param + s[j];
@@ -26,16 +24,11 @@ exports.Format = function(s, m) {
 				if (j == s.length) {
 					return output;
 				}
-
-				if (s[j] == ' ') {
-					output = output + ' ';
-				}
 			}
-			i = j + 1;
-		} else {
-			output = output + s[i];
-			i++;
+			i = j;
 		}
+		output = output + s[i];
+		i++;
 	}
 	return output;
 }

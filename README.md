@@ -1,6 +1,8 @@
 # Sringf
 Dead simple cross-language string formatter
 
+No dependencies, O(N*m)
+
 # Usage
 ## go
 ```go
@@ -20,7 +22,7 @@ func main() {
 ```
 
 ## js
-```
+```js
 var stringf = require("stringf")
 
 var str = stringf.Format("hi #name, here is your number ##2108.", {
@@ -31,7 +33,7 @@ console.log(str)
 // hi Kieu Thanh, here is your number #2108.
 ```
 
-# Pseudocode for implement in your own language
+# Pseudocode to implement in your own language
 ```
 input:
 	a string, s
@@ -48,9 +50,7 @@ while i < length(s) do
 			j ← j + 1
 			if (j - i) mod 2 = 0 then
 				output ← output + ESCCHAR
-		if (j - i) mod 2 = 0 then
-			output ← output + s[j]
-		else
+		if (j - i) mod 2 ≠ 0 then
 			let param ← ""
 			while j < length(s) and s[j] ≠ ' ' do
 				param ← param + s[j]
@@ -59,11 +59,8 @@ while i < length(s) do
 				output ← output + paramMap[param]
 			if j = length(s) then
 				return output
-			if s[j] = ' ' then
-				output ← output + ' '
-		i ← j + 1
-	else
-		output ← output + s[i]
-		i ← i + 1
+		i ← j
+	output ← output + s[i]
+	i ← i + 1
 return output
 ```
