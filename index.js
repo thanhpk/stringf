@@ -23,6 +23,8 @@ exports.Format = function(s, m) {
 				}
 				if (j == s.length) {
 					return output;
+				} else if (s[j] == ' ') {
+					j++;
 				}
 			}
 			i = j;

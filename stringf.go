@@ -17,19 +17,25 @@ func Format(s string, m map[string]string) string {
 			}
 			if (j - i) % 2 != 0 {
 				param := ""
-				for j < len(s) && s[j] != byte(' ') {
+				for j < len(s) &&  s[j] != byte(' ') {
 					param = param + string(s[j])
 					j++
 				}
-
 				if len(param) > 0 {
 					output = output + m[param]
 				}
-				if j == len(s) { return output }
+
+				if j == len(s) {
+					return output
+				} else if s[j] == byte(' ') {
+					j++
+				}
 			}
 			i = j
 		}
-		output = output + string(s[i])
+		if i < len(s) {
+			output = output + string(s[i])
+		}
 		i++
 	}
 	return output

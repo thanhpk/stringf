@@ -77,6 +77,8 @@ while i < length(s) do
 				output ← output + paramMap[param]
 			if j = length(s) then
 				return output
+			else if s[j = ' ' then
+				j ← j + 1
 		i ← j
 	output ← output + s[i]
 	i ← i + 1
