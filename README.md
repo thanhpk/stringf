@@ -12,25 +12,25 @@ import (
 )
 
 func main() {
-	str := stringf.Format("hi #name, here is your number ##2108.", map[string]string{
+	str := stringf.Format("hi {name}, here is your number {{2108}.", map[string]string{
 		"name": "Kieu Thanh", // key should not contains spaces
 	})
 	fmt.Println(str)
 }
 
-// hi Kieu Thanh, here is your number #2108.
+// hi Kieu Thanh, here is your number {2108.
 ```
 
 ## js
 ```js
 var stringf = require("stringf")
 
-var str = stringf.Format("hi #name, here is your number ##2108.", {
+var str = stringf.Format("hi #name, here is your number {{2108.", {
 	name: "Thanh",
 })
 console.log(str)
 
-// hi Kieu Thanh, here is your number #2108.
+// hi Kieu Thanh, here is your number {2108.
 ```
 
 # Test
@@ -47,9 +47,9 @@ npm test
 # Testcase
 | String    | Parameter map | Output    |
 |-----------|---------------|-----------|
-| hi #name  | name: `Thanh` | hi Thanh  |
-| hi #num   | num: `2108`   | hi 2108   |
-| ##abc     | abc: `bcd`    | #abc      |
+| hi {name}  | name: `Thanh` | hi Thanh  |
+| hi {num}   | num: `2108`   | hi 2108   |
+| {{abc}     | abc: `bcd`    | {abc      |
 
 # Pseudocode to implement in your own language
 
@@ -60,7 +60,7 @@ npm test
   a string with param replaced
 
 ```
-let ESCCHAR ← '#', i ← 0, output ← ""
+let ESCCHAR ← '{', ESCCHAREND ← '}', i ← 0, output ← ""
 while i < length(s) do
 	if s[i] = ESCCHAR then
 		let j ← i + 1
@@ -70,14 +70,14 @@ while i < length(s) do
 				output ← output + ESCCHAR
 		if (j - i) mod 2 ≠ 0 then
 			let param ← "" (parse parameter key)
-			while j < length(s) and s[j] ≠ ' ' do
+			while j < length(s) and s[j] ≠ ESCCHAREND do
 				param ← param + s[j]
 				j ← j + 1
 			if length(param) > 0 then
 				output ← output + paramMap[param]
 			if j = length(s) then
 				return output
-			else if s[j = ' ' then
+			else if s[j = ESCCHAREND then
 				j ← j + 1
 		i ← j
 	output ← output + s[i]
