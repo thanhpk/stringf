@@ -1,10 +1,18 @@
 package stringf
 
+const ESCCHAR = byte('{');
+const ESCCHAREND = byte('}')
+
+func isAlphabet(r byte) bool {
+	if (r < 'a' || 'z' < r) && (r < 'A' || 'Z' < r) && ( r < '0' || '9' < r) && r != '_' && r != ESCCHAREND {
+		return false
+	}
+	return true
+}
+
 // Format format s using map m
 // Keys of map m can be anything but must not contains spaces
 func Format(s string, m map[string]string) string {
-	ESCCHAR := byte('{');
-	ESCCHAREND := byte('}')
 	i := 0
 	output := ""
 	for i < len(s) {
@@ -18,12 +26,26 @@ func Format(s string, m map[string]string) string {
 			}
 			if (j - i) % 2 != 0 {
 				param := ""
-				for j < len(s) && s[j] != ESCCHAREND {
+				for j < len(s) && s[j] != ESCCHAREND && isAlphabet(s[j]) {
 					param += string(s[j])
 					j++
 				}
 				if len(param) > 0 {
-					output += m[param]
+					if !isAlphabet(s[j]) {
+						output = output + string(ESCCHAR) + param[0:len(param)-1]
+						j--
+					} else {
+						v, ok := m[param]
+						if !ok { // no key ->
+							output = output + string(ESCCHAR) + param
+							if j >= len(s) {
+							} else if s[j] == ESCCHAREND {
+								output += string(ESCCHAREND)
+							}
+						} else {
+							output += v
+						}
+					}
 				}
 
 				if j == len(s) {

@@ -3,6 +3,7 @@ Dead simple cross-language string formatter
 
 No dependencies, O(N*m)
 
+*Note: Key must only contains alphabet and `_`. Invalid keys will be ignore*
 # Usage
 ## go
 ```go
@@ -12,25 +13,25 @@ import (
 )
 
 func main() {
-	str := stringf.Format("hi {name}, here is your number {{2108}.", map[string]string{
+	str := stringf.Format("hi {name}, here is your number {{2108 and {name2}.", map[string]string{
 		"name": "Kieu Thanh", // key should not contains spaces
 	})
 	fmt.Println(str)
 }
 
-// hi Kieu Thanh, here is your number {2108.
+// hi Kieu Thanh, here is your number {2108 and {name2}.
 ```
 
 ## js
 ```js
 var stringf = require("stringf")
 
-var str = stringf.Format("hi #name, here is your number {{2108.", {
+var str = stringf.Format("hi {name}, here is your number {{2108 and {name2}.", {
 	name: "Thanh",
 })
 console.log(str)
 
-// hi Kieu Thanh, here is your number {2108.
+// hi Thanh, here is your number {2108 and {name2}.
 ```
 
 # Test
