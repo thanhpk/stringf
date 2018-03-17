@@ -1,18 +1,28 @@
 package stringf
 
-const ESCCHAR = byte('{');
-const ESCCHAREND = byte('}')
+const ESCCHAR = '{';
+const ESCCHAREND = '}';
 
-func isAlphabet(r byte) bool {
+func isAlphabet(r rune) bool {
 	if (r < 'a' || 'z' < r) && (r < 'A' || 'Z' < r) && ( r < '0' || '9' < r) && r != '_' && r != ESCCHAREND {
 		return false
 	}
 	return true
 }
 
+
+func copyr(s string) []rune {
+	rs := make([]rune, len(s), len(s))
+	for i, r := range s {
+		rs[i] = r
+	}
+	return rs
+}
+
 // Format format s using map m
 // Keys of map m can be anything but must not contains spaces
-func Format(s string, m map[string]string) string {
+func Format(us string, m map[string]string) string {
+	s := copyr(us)
 	i := 0
 	output := ""
 	for i < len(s) {
