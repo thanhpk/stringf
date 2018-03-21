@@ -10,11 +10,10 @@ func isAlphabet(r rune) bool {
 	return true
 }
 
-
 func copyr(s string) []rune {
-	rs := make([]rune, len(s), len(s))
-	for i, r := range s {
-		rs[i] = r
+	rs := make([]rune, 0, len(s))
+	for _, r := range s {
+		rs = append(rs, r)
 	}
 	return rs
 }
